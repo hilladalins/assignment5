@@ -1,14 +1,19 @@
 var lulu = {}
 
-lulu.start = function () {
+lulu.start = function () {  
     lulu.createArrOfImg();
     lulu.createArrayOfRandomIndexes();
     lulu.enterCardsToTheBoard();
-    lulu.conectEvents();
+    lulu.connectButtonsEvent();
+    lulu.connectClickToCards();
 }
 
 lulu.namesOfCards = ["spain", "netherlands", "jamaica", "argentina", "romania", "australia"]
 lulu.cardsFlipped = [];
+
+lulu.newGame = function(){
+    location.reload();
+}
 
 lulu.createArrOfImg = function () {
     lulu.imagesSRC = []
@@ -48,7 +53,11 @@ lulu.enterCardsToTheBoard = function () {
     })
 }
 
-lulu.conectEvents = function () {
+lulu.connectButtonsEvent = function (){
+    $(".new-game-button").on("click", lulu.newGame);
+}
+
+lulu.connectClickToCards = function () {
     $(".non-matched").on("click", lulu.play);
 }
 
@@ -66,21 +75,26 @@ lulu.flipCard = function (elem) {
     elem.find("img").toggleClass("non-active");
 }
 
-lulu.checkIfCorrect = function () {
+lulu.checkIfCorrect = function () { 
     $("span").off("click", lulu.play);
     if (lulu.cardsFlipped[0].data("imgSRC") !== lulu.cardsFlipped[1].data("imgSRC")) {
         setTimeout(function () {
             lulu.flipCard(lulu.cardsFlipped[0]);
             lulu.flipCard(lulu.cardsFlipped[1]);
             lulu.cardsFlipped = [];
-            lulu.conectEvents();
+            lulu.connectClickToCards();
         }, 1000);
     }
     else {
+        lulu.cardsFlipped[0].removeClass("non-matched");
+        lulu.cardsFlipped[1].removeClass("non-matched");
         lulu.cardsFlipped[0].off("click", lulu.play);
         lulu.cardsFlipped[1].off("click", lulu.play);
+        if ($(".non-matched").length===0){
+            $("#modal-container").css("display", "block");
+        }
         lulu.cardsFlipped = [];
-        lulu.conectEvents();
+        lulu.connectClickToCards();
     }
     
 }
