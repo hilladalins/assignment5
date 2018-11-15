@@ -1,6 +1,7 @@
 var lulu = {}
 
-lulu.start = function () {  
+lulu.start = function () {
+    lulu.createDefault();
     lulu.createArrOfImg();
     lulu.createArrayOfRandomIndexes();
     lulu.enterCardsToTheBoard();
@@ -9,11 +10,16 @@ lulu.start = function () {
 }
 
 lulu.namesOfCards = ["spain", "netherlands", "jamaica", "argentina", "romania", "australia"]
-lulu.cardsFlipped = [];
 
-lulu.newGame = function(){
+lulu.createDefault = function () {
+    lulu.cardsFlipped = [];
+    lulu.trialsCounter = 0;
+    $(".trials-counter").text(lulu.trialsCounter);
+};
+
+lulu.newGame = function () {
     location.reload();
-}
+};
 
 lulu.createArrOfImg = function () {
     lulu.imagesSRC = []
@@ -22,14 +28,14 @@ lulu.createArrOfImg = function () {
         lulu.imagesSRC.push(imgSrc)
         lulu.imagesSRC.push(imgSrc);
     }
-}
+};
 
 lulu.createArrayOfRandomIndexes = function () {
     lulu.randomIndexesArray = [];
     for (var i = 0; i < lulu.imagesSRC.length; i++) {
         lulu.createRandomIndex(i);
     }
-}
+};
 
 lulu.createRandomIndex = function (index) {
     var num = Math.floor(Math.random() * (lulu.imagesSRC.length));
@@ -39,11 +45,11 @@ lulu.createRandomIndex = function (index) {
     else {
         lulu.createRandomIndex(index);
     }
-}
+};
 
 lulu.enterCardsToTheBoard = function () {
     var index = 0;
-    $("span").each(function () {
+    $(".card").each(function () {
         var card = $("<img/>").attr("src", lulu.randomIndexesArray[index]);
         card.addClass("non-active");
         $(this).append(card);
@@ -51,15 +57,15 @@ lulu.enterCardsToTheBoard = function () {
         $(this).addClass("non-matched");
         index++;
     })
-}
+};
 
-lulu.connectButtonsEvent = function (){
+lulu.connectButtonsEvent = function () {
     $(".new-game-button").on("click", lulu.newGame);
-}
+};
 
 lulu.connectClickToCards = function () {
     $(".non-matched").on("click", lulu.play);
-}
+};
 
 lulu.play = function () {
     lulu.flipCard($(this));
@@ -69,18 +75,20 @@ lulu.play = function () {
         return;
     }
     $(this).off("click", lulu.play);
-}
+};
 
 lulu.flipCard = function (elem) {
     elem.find("img").toggleClass("non-active");
-}
+};
 
-lulu.checkIfCorrect = function () { 
-    $("span").off("click", lulu.play);
+lulu.checkIfCorrect = function () {
+    $(".card").off("click", lulu.play);
     if (lulu.cardsFlipped[0].data("imgSRC") !== lulu.cardsFlipped[1].data("imgSRC")) {
         setTimeout(function () {
             lulu.flipCard(lulu.cardsFlipped[0]);
             lulu.flipCard(lulu.cardsFlipped[1]);
+            lulu.trialsCounter++;
+            $(".trials-counter").text(lulu.trialsCounter);
             lulu.cardsFlipped = [];
             lulu.connectClickToCards();
         }, 1000);
@@ -90,17 +98,14 @@ lulu.checkIfCorrect = function () {
         lulu.cardsFlipped[1].removeClass("non-matched");
         lulu.cardsFlipped[0].off("click", lulu.play);
         lulu.cardsFlipped[1].off("click", lulu.play);
-        if ($(".non-matched").length===0){
+        if ($(".non-matched").length === 0) {
             $("#modal-container").css("display", "block");
         }
         lulu.cardsFlipped = [];
         lulu.connectClickToCards();
     }
-    
-}
 
-
-
+};
 
 
 $(document).ready(function () {
