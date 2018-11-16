@@ -1,7 +1,9 @@
 var lulu = {}
 
 lulu.start = function () {
-    lulu.createDefault();
+    lulu.setDefault();
+    lulu.setBackground();
+    lulu.setBackCards();
     lulu.createArrOfImg();
     lulu.createArrayOfRandomIndexes();
     lulu.enterCardsToTheBoard();
@@ -10,9 +12,12 @@ lulu.start = function () {
     lulu.startPlayingAudio();
 }
 
-lulu.namesOfCards = ["spain", "netherlands", "jamaica", "argentina", "romania", "australia"]
+lulu.world = ["spain", "netherlands", "jamaica", "argentina", "romania", "australia"];
+lulu.rap = ["eminem", "jay-z", "kendrick-lamar", "nas", "snoop-dog","two-pac"];
+lulu.flowers = ["calanit", "irus", "narkis", "rakefet", "sitvanit", "tzivoni"];
 
-lulu.createDefault = function () {
+lulu.setDefault = function () {
+    lulu.subject = "flowers"
     lulu.cardsFlipped = [];
     lulu.trialsCounter = 0;
     $(".trials-counter").text(lulu.trialsCounter);
@@ -22,26 +27,36 @@ lulu.newGame = function () {
     location.reload();
 };
 
+lulu.setBackground = function () {
+    $("body").addClass(lulu.subject);
+}
+
+lulu.setBackCards = function () {
+    $(".back").css({
+        "background" :`url("./img/${lulu.subject}/${lulu.subject}-back.jpg")`,
+        "background-size": "cover"
+    })
+}
+
 lulu.createArrOfImg = function () {
-    lulu.imagesUrl = []
-    for (var i = 0; i < lulu.namesOfCards.length; i++) {
-        var imgUrl = `url(./img/${lulu.namesOfCards[i]}.jpg)`;
-        lulu.imagesUrl.push(imgUrl)
-        lulu.imagesUrl.push(imgUrl);
+    lulu.imagesNames = []
+    for (var i = 0; i < lulu[lulu.subject].length; i++) {
+        lulu.imagesNames.push(lulu[lulu.subject][i]);
+        lulu.imagesNames.push(lulu[lulu.subject][i]);
     }
 };
 
 lulu.createArrayOfRandomIndexes = function () {
     lulu.randomIndexesArray = [];
-    for (var i = 0; i < lulu.imagesUrl.length; i++) {
+    for (var i = 0; i < lulu.imagesNames.length; i++) {
         lulu.createRandomIndex(i);
     }
 };
 
 lulu.createRandomIndex = function (index) {
-    var num = Math.floor(Math.random() * (lulu.imagesUrl.length));
+    var num = Math.floor(Math.random() * (lulu.imagesNames.length));
     if (lulu.randomIndexesArray[num] === undefined) {
-        lulu.randomIndexesArray[num] = lulu.imagesUrl[index];
+        lulu.randomIndexesArray[num] = lulu.imagesNames[index];
     }
     else {
         lulu.createRandomIndex(index);
@@ -51,11 +66,15 @@ lulu.createRandomIndex = function (index) {
 lulu.enterCardsToTheBoard = function () {
     var index = 0;
     $(".card").each(function () {
-        var card = $("<div/>").css("background-image", lulu.randomIndexesArray[index]);
-        card.addClass("card-img");
-        card.addClass("is-flipped");
-        $(this).append(card);
-        $(this).data("imgUrl", lulu.randomIndexesArray[index]);
+        var imgPath = `url(./img/${lulu.subject}/${lulu.randomIndexesArray[index]}.jpg)`
+        var frontCard = $("<div/>").css({
+            "background-image": imgPath,
+            "background-position": "center"
+        });
+        frontCard.addClass("card-img");
+        frontCard.addClass("is-flipped");
+        $(this).append(frontCard);
+        $(this).data("cardImg", lulu.randomIndexesArray[index]);
         $(this).addClass("non-matched");
         index++;
     })
@@ -98,7 +117,7 @@ lulu.flipCard = function (elem) {
 
 lulu.checkIfCorrect = function () {
     $(".card").off("click", lulu.play);
-    if (lulu.cardsFlipped[0].data("imgUrl") !== lulu.cardsFlipped[1].data("imgUrl")) {
+    if (lulu.cardsFlipped[0].data("cardImg") !== lulu.cardsFlipped[1].data("cardImg")) {
         setTimeout(function () {
             lulu.flipCard(lulu.cardsFlipped[0]);
             lulu.flipCard(lulu.cardsFlipped[1]);
@@ -116,7 +135,7 @@ lulu.checkIfCorrect = function () {
         if ($(".non-matched").length === 0) {
             setTimeout(function(){
                 $("#modal-container").css("display", "block");
-            },700);            
+            },600);            
         }
         lulu.cardsFlipped = [];
         lulu.connectClickToCards();

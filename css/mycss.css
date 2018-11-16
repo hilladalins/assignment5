@@ -7,10 +7,6 @@ body{
 
 body::after{
     content: "";
-    background: url("../img/world-map.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     opacity: 0.5;
     position: fixed;
     top: 0;
@@ -19,6 +15,28 @@ body::after{
     left: 0;
     z-index: -1;
 }
+
+body.world::after{
+    background: url("../img/world/world.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body.rap::after{
+    background: url("../img/rap/rap.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body.flowers::after{
+    background: url("../img/flowers/flowers.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 
 button{
     font-family: inherit;
@@ -122,10 +140,6 @@ button:active{
 
 }
 
-.back{
-    background: url("../img/back-card.png");
-}
-
 
 .is-flipped{
     transform: rotateY(180deg);
@@ -150,7 +164,7 @@ button:active{
     left:50%;
     transform: translateY(-50%) translateX(-50%);
     border: 1px solid black;
-    width: 50%;
+    width: 30%;
     height: 40%;
     text-align: center;
     display: flex;
