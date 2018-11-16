@@ -1,11 +1,11 @@
 var lulu = {}
 
-lulu.world = ["spain", "netherlands", "jamaica", "argentina", "romania", "australia", "kenya", "italy","norway", "canada"];
-lulu.rap = ["eminem", "jay-z", "kendrick-lamar", "nas", "snoop-dog", "two-pac", "cardi-b", "notorious-big", "nicki-minaj", "ice-cube"];
-lulu.flowers = ["calanit", "irus", "narkis", "rakefet", "sitvanit", "tzivoni", "dvoranit", "shoshan", "turmus", "iris"];
+lulu.world = ["spain", "netherlands", "jamaica", "argentina", "romania", "australia", "kenya", "italy","norway", "canada", "nigeria", "south-corea"];
+lulu.rap = ["eminem", "jay-z", "kendrick-lamar", "nas", "snoop-dog", "two-pac", "cardi-b", "notorious-big", "nicki-minaj", "ice-cube", "drake", "missy-elliott"];
+lulu.flowers = ["calanit", "irus", "narkis", "rakefet", "sitvanit", "tzivoni", "dvoranit", "shoshan", "turmus", "iris", "hazav", "nurit"];
 lulu.easy = 12;
-lulu.medium = 16;
-lulu.hard = 20;
+lulu.medium = 18;
+lulu.hard = 24;
 
 lulu.start = function () {
     lulu.board = $(".board-wrap");
@@ -15,6 +15,9 @@ lulu.start = function () {
 
 lulu.connectButtonsEvent = function () {
     $(".new-game-button").on("click", lulu.newGame);
+    $(".play-again-button").on("click", function(){
+        location.reload();
+    })
 };
 
 lulu.newGame = function () {
@@ -39,7 +42,6 @@ lulu.setDefault = function () {
 lulu.setBoard = function () {
     lulu.board.removeClass();
     lulu.board.addClass("board-wrap");
-    lulu.board.addClass(lulu.level);
     var trialsCounter = $("<span/>");
     trialsCounter.addClass("trials-counter");
     trialsCounter.text(lulu.trialsCounter)
@@ -49,9 +51,10 @@ lulu.setBoard = function () {
     trials.append(trialsCounter);
     var cardWrap = $("<div/>");
     cardWrap.addClass("cards-wrap");
+    cardWrap.addClass(lulu.level);
     lulu.board.append(trials);
     lulu.board.append(cardWrap);
-    for (var i = 0; i < parseInt(lulu.numberOfCards); i++) {
+    for (var i = 0; i < lulu.numberOfCards; i++) {
         var cardContainer = $("<div/>");
         cardContainer.addClass("card-container");
         cardContainer.addClass(`${lulu.level}-card`);
@@ -77,9 +80,6 @@ lulu.setSubject = function () {
     lulu.startPlayingAudio();
 }
 
-
-
-
 lulu.setBackground = function () {
     $("body").addClass(lulu.subject);
 }
@@ -93,7 +93,7 @@ lulu.setBackCards = function () {
 
 lulu.createArrOfImg = function () {
     lulu.imagesNames = []
-    for (var i = 0; i < lulu[lulu.subject].length; i++) {
+    for (var i = 0; i < lulu.numberOfCards/2; i++) {
         lulu.imagesNames.push(lulu[lulu.subject][i]);
         lulu.imagesNames.push(lulu[lulu.subject][i]);
     }

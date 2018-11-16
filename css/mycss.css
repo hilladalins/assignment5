@@ -95,24 +95,10 @@ select{
     margin: auto;
     text-align: center;
     position: fixed;
-    top:50%;
-    left:50%;
-    transform: translateX(-50%) translateY(-50%);
+    top:18vh;
+    left: 50%;
+    transform: translateX(-50%);
     display:none;
-}
-
-.board-wrap.easy{
-    width: 50%;
-}
-
-.board-wrap.medium{
-    width:50%;
-    top:55%;
-}
-
-.board-wrap.hard{
-    width:60%;
-    top:55%;
 }
 
 .trials{
@@ -124,25 +110,28 @@ select{
     background-color: rgba(247, 247, 247, 0.959);
     border: 2px solid gray;
     border-radius: 7%;
-    padding: 5px;
+    padding: 1em;
+    display: grid;
+    grid-gap: 1em;
 }
 
-.row-wrap{
-    display: flex;
-    flex-wrap: wrap;
+.easy{
+    grid-template-columns: repeat(4, 1fr);
 }
 
-.col-wrap{
-    display: flex;
-    flex-wrap: wrap;
+.medium{
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.hard{
+    grid-template-columns: repeat(6, 1fr);
 }
 
 .card-container{
     width: 150px;
     height: 100px;
     perspective: 600px;
-    margin: 10px;
-    display: inline-block;
+    justify-self: center;
 }
 
 .card {
@@ -161,7 +150,6 @@ select{
     backface-visibility: hidden;
     background-size: cover;
 }
-
 
 .is-flipped{
     transform: rotateY(180deg);
@@ -206,76 +194,66 @@ select{
     display:block;
 }
 
-@media only screen and (max-width: 1400px) {
-    .board-wrap.medium{
-        width:60%
-    }
-    .board-wrap.hard{
-        width:60%;
-    }
-}
-
-@media only screen and (max-width: 900px) {
-    .header{
-        height: 40px;
-    }
-    .board-wrap.easy{
-        width: 80%;
-    }
-    .board-wrap.medium{
-        width: 98%;
-    }
-    .board-wrap.hard{
-        width: 98%;
-    }
+@media only screen and (max-width: 1050px) {
     #modal-content{
         width: 70%;
         height: 30%;
     }
+    .card-container.medium-card{
+        width: 120px;
+        height: 80px;
+    }
+    .card-container.hard-card{
+        width: 120px;
+        height: 80px;
+    }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 850px) {
+    .header{
+        height: 40px;
+    }
+    .card-container.medium-card{
+        width: 90px;
+        height: 60px;
+    }
+    .card-container.hard-card{
+        width: 90px;
+        height: 60px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
     .header-element{
         width: 30%;
         margin: 0;
         text-align: center;
     }
-    .board-wrap.easy{
-        width: 95%;
-    }
     .trials{
         font-size: 16px;
     }
+    .easy{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .medium{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .hard{
+        grid-template-columns: repeat(4, 1fr);
+    }
     .card-container.easy-card{
-        width:105px;
+        width: 105px;
         height: 70px;
-        margin: 1px;
     }
     .card-container.medium-card{
-        width:90px;
+        width: 90px;
         height: 60px;
-        margin:1px;
-    }
-    .card-container.hard-card{
-        width:75px;
-        height:50px;
-        margin:1px;
-    }
-    #modal-content{
-        width: 70%;
-        height: 20%;
     }
 }
 
-@media only screen and (max-width: 400px) {
-    .card-container.medium-card{
-        width: 75px;
-        height: 50px;
-        margin:1px;
-    }
-}
-
-@media only screen and (max-width: 350px) {
+@media only screen and (max-width: 420px) {
     .header{
         font-size: 14px;
         padding: 0;
@@ -289,14 +267,33 @@ select{
         font-family: inherit;
         font-size: 12px;
     }
-    .card-container.medium-card{
-        width:60px;
-        height: 40px;
-        margin:1px;
+    .board-wrap{
+        top:10vh;
     }
+    .easy{
+        padding: 0.5em;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 0.5em;
+    }
+    .medium{
+        padding: 0.5em;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 0.5em;
+    }
+    .hard{
+        padding: 0.5em;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 0.5em;
+    }
+    .card-container.easy-card{
+        width: 90px;
+        height: 60px;
+    }
+}
+
+@media only screen and (max-width: 320px){
     .card-container.hard-card{
-        width:60px;
-        height:40px;
-        margin:1px;
+        width: 75px;
+        height: 50px;
     }
 }
