@@ -7,6 +7,7 @@ lulu.start = function () {
     lulu.enterCardsToTheBoard();
     lulu.connectButtonsEvent();
     lulu.connectClickToCards();
+    lulu.startPlayingAudio();
 }
 
 lulu.namesOfCards = ["spain", "netherlands", "jamaica", "argentina", "romania", "australia"]
@@ -68,6 +69,19 @@ lulu.connectClickToCards = function () {
     $(".non-matched").on("click", lulu.play);
 };
 
+lulu.startPlayingAudio = function (){
+    var audio = document.createElement("audio");
+    audio.id = "game-audio";
+    audio.src = "./audio/world.mp3"
+    audio.type = "audio/mpeg";
+    audio.preload = "auto";
+    audio.loop = "true";
+    audio.volume = 1;
+    audio.autoplay = "true";
+    document.getElementsByTagName("body")[0].appendChild(audio);
+    audio.load();
+};
+
 lulu.play = function () {
     lulu.flipCard($(this));
     lulu.cardsFlipped.push($(this));
@@ -100,7 +114,9 @@ lulu.checkIfCorrect = function () {
         lulu.cardsFlipped[0].off("click", lulu.play);
         lulu.cardsFlipped[1].off("click", lulu.play);
         if ($(".non-matched").length === 0) {
-            $("#modal-container").css("display", "block");
+            setTimeout(function(){
+                $("#modal-container").css("display", "block");
+            },700);            
         }
         lulu.cardsFlipped = [];
         lulu.connectClickToCards();
