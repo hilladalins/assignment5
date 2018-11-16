@@ -14,6 +14,10 @@ body::after{
     right: 0;
     left: 0;
     z-index: -1;
+    background: url("../img/background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 body.world::after{
@@ -48,7 +52,7 @@ button{
     padding: 6px;
     box-shadow: 0px 4px 2px 0px rgba(0,0,0,0.24);
     cursor: pointer;
-  outline: none;
+    outline: none;
 }
 
 button:hover{
@@ -61,6 +65,13 @@ button:active{
    transform: translateY(4px);
 }
 
+select{
+    font-family: inherit;
+    width: 80px;
+    font-size: 14px;
+}
+
+
 .header{
     position: fixed;
     top:0;
@@ -70,24 +81,38 @@ button:active{
     box-shadow: 0px 3px 18px -1px rgba(0,0,0,0.48);
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 5px;
     z-index: 1; 
 }
 
-.in-header{
-    margin-left: 10px;
+.header-element{
+    margin: 10px;
+    text-align: center;
 }
-
-
 
 .board-wrap{
     margin: auto;
-    width: 50%;
     text-align: center;
     position: fixed;
     top:50%;
     left:50%;
     transform: translateX(-50%) translateY(-50%);
+    display:none;
+}
+
+.board-wrap.easy{
+    width: 50%;
+}
+
+.board-wrap.medium{
+    width:50%;
+    top:55%;
+}
+
+.board-wrap.hard{
+    width:60%;
+    top:55%;
 }
 
 .trials{
@@ -112,8 +137,6 @@ button:active{
     flex-wrap: wrap;
 }
 
-
-
 .card-container{
     width: 150px;
     height: 100px;
@@ -137,7 +160,6 @@ button:active{
     width: 100%;
     backface-visibility: hidden;
     background-size: cover;
-
 }
 
 
@@ -154,7 +176,7 @@ button:active{
     width: 100%;
     height:100%;
     overflow:auto;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.192);
 }
 
 #modal-content{
@@ -163,7 +185,8 @@ button:active{
     top:50%;
     left:50%;
     transform: translateY(-50%) translateX(-50%);
-    border: 1px solid black;
+    border: 2px solid black;
+    border-radius: 20%;
     width: 30%;
     height: 40%;
     text-align: center;
@@ -179,14 +202,31 @@ button:active{
     font-size: 20px;
 }
 
+.acrive{
+    display:block;
+}
+
+@media only screen and (max-width: 1400px) {
+    .board-wrap.medium{
+        width:60%
+    }
+    .board-wrap.hard{
+        width:60%;
+    }
+}
+
 @media only screen and (max-width: 900px) {
     .header{
         height: 40px;
     }
-    .board-wrap{
-        margin: auto;
+    .board-wrap.easy{
         width: 80%;
-        text-align: center;
+    }
+    .board-wrap.medium{
+        width: 98%;
+    }
+    .board-wrap.hard{
+        width: 98%;
     }
     #modal-content{
         width: 70%;
@@ -195,21 +235,68 @@ button:active{
 }
 
 @media only screen and (max-width: 600px) {
-    .board-wrap{
-        margin: auto;
-        width: 95%;
+    .header-element{
+        width: 30%;
+        margin: 0;
         text-align: center;
+    }
+    .board-wrap.easy{
+        width: 95%;
     }
     .trials{
         font-size: 16px;
     }
-    .card-container{
+    .card-container.easy-card{
         width:105px;
         height: 70px;
         margin: 1px;
     }
+    .card-container.medium-card{
+        width:90px;
+        height: 60px;
+        margin:1px;
+    }
+    .card-container.hard-card{
+        width:75px;
+        height:50px;
+        margin:1px;
+    }
     #modal-content{
         width: 70%;
         height: 20%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .card-container.medium-card{
+        width: 75px;
+        height: 50px;
+        margin:1px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .header{
+        font-size: 14px;
+        padding: 0;
+
+    }
+    .header-element{
+        margin: 1px;
+        text-align: center;
+    }
+    select{
+        font-family: inherit;
+        font-size: 12px;
+    }
+    .card-container.medium-card{
+        width:60px;
+        height: 40px;
+        margin:1px;
+    }
+    .card-container.hard-card{
+        width:60px;
+        height:40px;
+        margin:1px;
     }
 }

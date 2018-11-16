@@ -35,72 +35,25 @@
 
 <body>
     <div class="header">
-        <button class="new-game-button in-header">New Game</button>
+        <div class="header-element">
+            <span> Choose subject: </span>
+            <select id="subject">
+                <option value="world">World</option>
+                <option value="rap">Rap</option>
+                <option value="flowers">Flowers</option>
+            </select>
+        </div>
+        <div class="header-element">
+            <span> Choose level: </span>
+            <select id="level">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        <button class="new-game-button header-element">New Game</button>
     </div>
     <div class="board-wrap">
-        <div class="trials"> Number of moves: <span class="trials-counter"></span> </div>
-        <div class="cards-wrap">
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img back"></div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img back"></div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img back"></div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img back"></div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img back"></div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img back"></div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img back"></div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img back"></div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img back"></div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img back"></div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img back"></div>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img back"></div>
-                </div>
-            </div>
-        </div>
     </div>
     <div id="modal-container">
         <div id="modal-content">
