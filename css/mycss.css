@@ -1,8 +1,3 @@
-img{
-    height: 100px;
-    width: 150px;
-    margin: 10px;
-}
 
 body{
     margin: 0;
@@ -30,20 +25,6 @@ body::after{
     align-items: center;
 }
 
-/* .trials{
-    align-self: flex-end;
-} */
-
-.cards-wrap{
-    background-color: rgba(255, 255, 255, 0.5);
-    border: 2px solid gray;
-    border-radius: 5%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-}
-
 .row-wrap{
     display: flex;
     flex-wrap: wrap;
@@ -55,8 +36,38 @@ body::after{
 }
 
 
-.non-active{
-    display: none;
+.card-container{
+    width: 150px;
+    height: 100px;
+    perspective: 600px;
+    margin: 10px;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: 0.5s;
+    transform-style: preserve-3d;
+  }
+
+
+.card .card-img{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+    background-size: cover;
+
+}
+
+.back{
+    background: url("../img/back-card.png");
+}
+
+
+.is-flipped{
+    transform: rotateY(180deg);
 }
 
 #modal-container{
