@@ -63,11 +63,9 @@ button:active{
 
 
 .board-wrap{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     margin: auto;
-    width: 70%;
+    width: 50%;
+    text-align: center;
     position: fixed;
     top:50%;
     left:50%;
@@ -75,7 +73,8 @@ button:active{
 }
 
 .trials{
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .cards-wrap{
@@ -102,6 +101,7 @@ button:active{
     height: 100px;
     perspective: 600px;
     margin: 10px;
+    display: inline-block;
 }
 
 .card {
@@ -158,4 +158,44 @@ button:active{
     justify-content: space-around;
     align-items: center;
     padding: 10px;
+    font-size: 40px;
+}
+
+.moves{
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 900px) {
+    .header{
+        height: 40px;
+    }
+    .board-wrap{
+        margin: auto;
+        width: 80%;
+        text-align: center;
+    }
+    #modal-content{
+        width: 70%;
+        height: 30%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .board-wrap{
+        margin: auto;
+        width: 95%;
+        text-align: center;
+    }
+    .trials{
+        font-size: 16px;
+    }
+    .card-container{
+        width:105px;
+        height: 70px;
+        margin: 1px;
+    }
+    #modal-content{
+        width: 70%;
+        height: 20%;
+    }
 }
